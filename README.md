@@ -25,4 +25,34 @@ following transition probabilities:
 
 One instance of running this Markov chain might produce { 'a': 3012, 'b': 1656, 'c': 332 }.
 
+## Building and running
+
+```sh
+$ go build .
+$ ./markov-chain a 5000 table1
+```
+This runs the example probabilities.
+
+To check my code, I wrote `table2`, which should end up with 50% of the visits to state `a`,
+and 50% to state `b`.
+
 ## Analysis
+
+I suspect that the "easy" rating was done by someone who knew what a Markov Chain was,
+and had worked this sort of problem a lot, but forgot how the first time they did it felt.
+
+This might be a decent interview question, for a mid- to senior-level position candidate.
+There's a lot going on:
+getting a floating point probability between 0.0 and 1.0,
+finding the next states and their probabilities from the current state,
+printing out the number of visits for each state.
+There's probably a choice of data structures that would work,
+but I chose a go `map[rune][]*TableEntry`,
+where `TableEntry` is a struct that has a next state and the probability of transitioning to that next state.
+That's a lot of design decisions for a candidate to talk through.
+
+It's also entirely possible that Google, who employs a lot of "data scientists",
+wants people who have inside knowledge about this type of problem.
+Selecting a next state based on proability seems like the kind of thing
+that has a stock solution that only specialists know.
+I'm not super happy about my solution.
